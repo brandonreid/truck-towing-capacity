@@ -2140,12 +2140,12 @@ input[type="radio"] {
   content: '\e018';
 }
 /* '' */
-.icon-close:before {
+.icon-close:before,
+span.over:before {
   content: '\e019';
 }
 /* '' */
-.icon-remove:before,
-span.over:before {
+.icon-remove:before {
   content: '\e020';
 }
 /* '' */
@@ -3303,18 +3303,14 @@ label.error + textarea,
   margin: 0;
   line-height: 1.9em;
 }
-.input-w-inlay .inlay.icon-remove,
-.input-w-inlay .inlayspan.over {
+.input-w-inlay .inlay.icon-remove {
   color: #776E6E;
 }
 .input-w-inlay .inlay.icon-remove:hover,
-.input-w-inlay .inlay.icon-remove:focus,
-.input-w-inlay .inlayspan.over:hover,
-.input-w-inlay .inlayspan.over:focus {
+.input-w-inlay .inlay.icon-remove:focus {
   color: #c21a15;
 }
-.input-w-inlay .inlay.icon-remove:active,
-.input-w-inlay .inlayspan.over:active {
+.input-w-inlay .inlay.icon-remove:active {
   color: #941410;
 }
 .input-w-button.error input + button,
@@ -3481,6 +3477,9 @@ span.good {
 span.over {
   color: #c21a15;
   font-weight: bold;
+}
+span.over:before {
+  font-size: 1.25em;
 }
 .disclaimer {
   text-align: center;

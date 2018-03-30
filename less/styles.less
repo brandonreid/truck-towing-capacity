@@ -67,7 +67,10 @@ span.good {
 span.over {
   color: @clr-red;
   font-weight: bold;
-  &:extend(.icon-remove all);
+  &:extend(.icon-close all);
+  &:before {
+    font-size: 1.25em;
+  }
 }
 
 .disclaimer {
