@@ -148,7 +148,8 @@
 
     function calcAvailablePayload() {
       var truckPayload = $('#payload').val() ? parseInt($('#payload').val(), 10) : 0;
-      rvHitchWeight = $('#payload').val() ? parseInt($('#hitchweight').val(), 10) : 0;
+      console.log($('#payload').val());
+      rvHitchWeight = $('#hitchweight').val() ? parseInt($('#hitchweight').val(), 10) : 0;
       var availPayload = (truckPayload - estPayload) - rvHitchWeight;
       $('#availablePayload').text(numberWithCommas(availPayload));
       if (availPayload < 0) {
