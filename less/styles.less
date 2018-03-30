@@ -1,0 +1,77 @@
+@bootstrap-path: '../node_modules/bootstrap/less';
+@patterns-path: '../node_modules/benchmark-patterns/less';
+
+// bootstrap imports
+@import "@{bootstrap-path}/variables.less";
+@import "@{bootstrap-path}/mixins.less";
+@import "@{bootstrap-path}/normalize.less";
+@import "@{bootstrap-path}/type.less";
+@import "@{bootstrap-path}/grid.less";
+@import "@{bootstrap-path}/tooltip.less";
+
+// pl imports
+@import "@{patterns-path}/_variables.less";
+@import "@{patterns-path}/_global.less";
+@import "@{patterns-path}/_icons.less";
+@lato-font-path: '../node_modules/benchmark-patterns/fonts/lato/';
+@icon-font-path: '../node_modules/benchmark-patterns/fonts/benchmark_icons/';
+@import "_typography-copy.less";
+@import "@{patterns-path}/_grid.less";
+@import "@{patterns-path}/_tables.less";
+@import "@{patterns-path}/_inputs.less";
+
+
+body {
+  background-color: #f8f8f8;
+}
+
+.header-content {
+  margin-bottom: 1em;
+  h1 {
+    font-weight: 400;
+  }
+}
+
+h2 {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 0.25em;
+}
+
+table {
+  background-color: white;
+  table-layout: fixed;
+  margin-bottom: 1em;
+  td {
+    position: relative;
+  }
+}
+
+label {
+  font-weight: 400;
+}
+
+span {
+  &:before {
+    content: ' ';
+    font-family: "benchmark";
+    margin-right: 0.5em;
+  }
+}
+
+span.good {
+  color: @clr-green;
+  &:extend(.icon-accept all);
+}
+
+span.over {
+  color: @clr-red;
+  font-weight: bold;
+  &:extend(.icon-remove all);
+}
+
+.disclaimer {
+  text-align: center;
+  max-width: 43.249em;
+  margin: 0 auto 1em;
+}

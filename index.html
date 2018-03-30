@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="./css/styles.css">
+  <title>Document</title>
+</head>
+<body>
+  <div class="row header-content">
+    <div class="col-xs-24">
+      <h1>GVWR and Payload Calc</h1>
+      <p>This is a simple calculator based on the spreadsheet created by Marc from <a href="http://www.keepyourdaydream.com/">Keep Your Daydream</a>. Read his original article <a href="http://www.keepyourdaydream.com/payload/">here</a>.</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <h2>Truck</h2>
+      <table>
+        <tbody>
+          <tr>
+            <td><label for="curbWeight">Curb Weight</label></td>
+            <td><input type="number" min="0" value="0" id="curbWeight"></td>
+          </tr>
+          <tr>
+            <td><label for="gvwr">GVWR</label></td>
+            <td><input type="number" min="0" value="0" id="gvwr"></td>
+          </tr>
+          <tr>
+            <td><label for="gcvwr">GCVWR</label></td>
+            <td><input type="number" min="0" value="0" id="gcvwr"></td>
+          </tr>
+          <tr>
+            <td><label for="payload">Payload</label></td>
+            <td><input type="number" min="0" value="0" id="payload"></td>
+          </tr>
+          <tr>
+            <td><label for="towingCapacity">Towing Capacity</label></td>
+            <td><input type="number" min="0" value="0" id="towingCapacity"></td>
+          </tr>
+        </tbody>
+      </table>
+      <h2>Estimated Payload</h2>
+      <table>
+        <tbody>
+          <tr>
+            <td><label for="passengers">Passenger Weight</label></td>
+            <td><input type="number" min="0" value="0" id="passengers"></td>
+          </tr>
+          <tr>
+            <td><label for="cargo">Cargo Weight</label></td>
+            <td><input type="number" min="0" value="0" id="cargo"></td>
+          </tr>
+          <tr>
+            <td>Total Payload <em class="small">(minus hitch weight)</em></td>
+            <td><span id="estPayload">0</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-sm-12">
+      <h2>Towable RV</h2>
+      <table>
+        <tbody>
+          <tr>
+            <td><label for="rvuvw">UVW</label></td>
+            <td><input type="number" min="0" value="0" id="rvuvw"></td>
+          </tr>
+          <tr>
+            <td><label for="rvGvwr">GVWR</label></td>
+            <td><input type="number" min="0" value="0" id="rvGvwr"></td>
+          </tr>
+          <tr>
+            <td><label for="hitchweight">Hitch Weight</label></td>
+            <td><input type="number" min="0" value="0" id="hitchweight"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <h2>Hitched Totals</h2>
+      <table>
+        <tbody>
+          <tr>
+            <td><strong>Available Payload</strong></td>
+            <td><span id="availablePayload" class="good">0</span></td>
+          </tr>
+          <tr>
+            <td><strong>New GVW</strong></td>
+            <td><span id="newGvw" class="good">0</span></td>
+          </tr>
+          <tr>
+            <td><strong>New GCVW</strong></td>
+            <td><span id="newGcvw" class="good">0</span></td>
+          </tr>
+          <tr>
+            <td><strong>Towing Capacity</strong></td>
+            <td><span id="towingCapTotal" class="good">0</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-24">
+      <p class="disclaimer"><strong>Disclaimer:</strong> It is your responsbility to check all formulas, numbers and data for accurate information. Also check the load capacity of your tires. This calculator does not include GAWR. Gross Axle Weight Rating. Make sure you check your axle ratings and compare to your scale.</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-24">
+      <p class="center">Coded by <a href="https://brandonreid.github.io/portfolio/" target="_blank">Brandon Reid</a></p>
+    </div>
+  </div>
+
+</body>
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+<script>
+  $(document).ready(function(){
+    var estPayload = 0;
+    var rvHitchWeight = 0;
+    var gvw = 0;
+
+    function numberWithCommas(n) {
+      var parts=n.toString().split(".");
+      return parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",") + (parts[1] ? "." + parts[1] : "");
+    }
+
+    function calcEstPayload() {
+      var passengersVal = $('#passengers').val() ? parseInt($('#passengers').val(), 10) : 0;
+      var cargoVal = $('#cargo').val() ? parseInt($('#cargo').val(), 10) : 0;
+      estPayload = passengersVal + cargoVal;
+
+      if (estPayload > 0) {
+        $('#estPayload').text(numberWithCommas(estPayload));
+      } else {
+        $('#estPayload').text('0');
+      }
+    }
+
+    function calcAvailablePayload() {
+      var truckPayload = $('#payload').val() ? parseInt($('#payload').val(), 10) : 0;
+      rvHitchWeight = $('#payload').val() ? parseInt($('#hitchweight').val(), 10) : 0;
+      var availPayload = (truckPayload - estPayload) - rvHitchWeight;
+      $('#availablePayload').text(numberWithCommas(availPayload));
+      if (availPayload < 0) {
+        $('#availablePayload')
+          .removeClass('good')
+          .addClass('over');
+      } else {
+        $('#availablePayload')
+          .removeClass('over')
+          .addClass('good');
+      }
+    }
+
+    function calcGvw() {
+      var curbWeight = $('#curbWeight').val() ? parseInt($('#curbWeight').val(), 10) : 0;
+      gvw = curbWeight + estPayload + rvHitchWeight;
+      $('#newGvw').text(numberWithCommas(gvw));
+      if (curbWeight < 0) {
+        $('#newGvw')
+          .addClass('over')
+          .removeClass('good');
+      } else {
+        $('#newGvw')
+          .removeClass('over')
+          .addClass('good');
+      }
+    }
+
+    function calcGcvw() {
+      var rvGvwr = $('#rvGvwr').val() ? parseInt($('#rvGvwr').val(), 10) : 0;
+      var gcvw = (rvGvwr - rvHitchWeight) + gvw;
+      $('#newGcvw').text(numberWithCommas(gcvw));
+      if (gcvw < 0) {
+        $('#newGcvw')
+          .addClass('over')
+          .removeClass('good');
+      } else {
+        $('#newGcvw')
+          .removeClass('over')
+          .addClass('good');
+      }
+    }
+
+    function calvTowingCapacity() {
+      var tc = $('#towingCapacity').val() ? parseInt($('#towingCapacity').val(), 10) : 0;
+      $('#towingCapTotal').text(numberWithCommas(tc));
+    }
+
+    function storeUpdatedValues() {
+      var storeValues = {
+        curbWeight: $('#curbWeight').val() ? parseInt($('#curbWeight').val(), 10) : 0,
+        gvwr: $('#gvwr').val() ? parseInt($('#gvwr').val(), 10) : 0,
+        gcvwr: $('#gcvwr').val() ? parseInt($('#gcvwr').val(), 10) : 0,
+        payload: $('#payload').val() ? parseInt($('#payload').val(), 10) : 0,
+        towingCapacity: $('#towingCapacity').val() ? parseInt($('#towingCapacity').val(), 10) : 0,
+        passengers: $('#passengers').val() ? parseInt($('#passengers').val(), 10) : 0,
+        cargo: $('#cargo').val() ? parseInt($('#cargo').val(), 10) : 0,
+        rvuvw: $('#rvuvw').val() ? parseInt($('#rvuvw').val(), 10) : 0,
+        rvGvwr: $('#rvGvwr').val() ? parseInt($('#rvGvwr').val(), 10) : 0,
+        hitchweight: $('#hitchweight').val() ? parseInt($('#hitchweight').val(), 10) : 0
+      };
+
+      localStorage['savedVehicleValues'] = JSON.stringify(storeValues);
+    }
+
+    function calculate() {
+      calcEstPayload();
+      calcAvailablePayload();
+      calcGvw();
+      calcGcvw();
+      calvTowingCapacity();
+    }
+
+    function calculateAndStore() {
+      calculate();
+      storeUpdatedValues();
+    }
+
+    $('input').on('focusout', calculateAndStore);
+
+    function setInitialValues() {
+      var storedJson = localStorage['savedVehicleValues'];
+      if (storedJson) {
+        var storedValues = JSON.parse(storedJson);
+        $.each(storedValues, function(key, val) {
+          $('#' + key).val(val);
+        });
+        calculate();
+      }
+    }
+    setInitialValues();
+
+  });
+</script>
+</html>

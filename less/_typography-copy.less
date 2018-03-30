@@ -1,0 +1,240 @@
+/**
+* @section Typography
+*/
+
+// Benchmark Icons
+@font-face {
+  font-family: 'benchmark';
+  src: url('@{icon-font-path}benchmark.eot?71161635');
+  src: url('@{icon-font-path}benchmark.eot?71161635#iefix') format('embedded-opentype'),
+       url('@{icon-font-path}benchmark.woff2?71161635') format('woff2'),
+       url('@{icon-font-path}benchmark.woff?71161635') format('woff'),
+       url('@{icon-font-path}benchmark.ttf?71161635') format('truetype'),
+       url('@{icon-font-path}benchmark.svg?71161635#benchmark') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/**
+* Benchmark uses Lato as it's base font, and Georgia as a serif font for written speach like SMS & Field Audit comments.
+*
+* @section Fonts
+* @sectionof Typography
+*
+* @hideCode
+* @example
+* <h4>Lato Styles Available:</h4>
+* <ul>
+*   <li><p>Lato Regular</p></li>
+*   <li><p style="font-weight:bold;">Lato Bold</p></li>
+*   <li><p style="font-style:italic;">Lato Italic</p></li>
+*   <li><p style="font-weight:300;">Lato Light (font-weight: 300;)</p></li>
+* </ul>
+* <h4>Georgia Styles Available:</h4>
+* <ul style="font-family:Georgia;">
+*   <li><p style="font-family:Georgia;">Georgia Regular</p></li>
+*   <li><p style="font-family:Georgia;font-weight:bold;">Georgia Bold</p></li>
+*   <li><p style="font-family:Georgia;font-style:italic;">Georgia Italic</p></li>
+* </ul>
+*/
+
+@font-face {
+  font-family: 'latoregular';
+  src: url('@{lato-font-path}Lato-Regular-webfont.eot');
+  src: url('@{lato-font-path}Lato-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+       url('@{lato-font-path}Lato-Regular-webfont.woff2') format('woff2'),
+       url('@{lato-font-path}Lato-Regular-webfont.woff') format('woff'),
+       url('@{lato-font-path}Lato-Regular-webfont.ttf') format('truetype'),
+       url('@{lato-font-path}Lato-Regular-webfont.svg#latoregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'latobold';
+  src: url('@{lato-font-path}Lato-Bold-webfont.eot');
+  src: url('@{lato-font-path}Lato-Bold-webfont.eot?#iefix') format('embedded-opentype'),
+       url('@{lato-font-path}Lato-Bold-webfont.woff2') format('woff2'),
+       url('@{lato-font-path}Lato-Bold-webfont.woff') format('woff'),
+       url('@{lato-font-path}Lato-Bold-webfont.ttf') format('truetype'),
+       url('@{lato-font-path}Lato-Bold-webfont.svg#latobold') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'latoitalic';
+  src: url('@{lato-font-path}Lato-Italic-webfont.eot');
+  src: url('@{lato-font-path}Lato-Italic-webfont.eot?#iefix') format('embedded-opentype'),
+       url('@{lato-font-path}Lato-Italic-webfont.woff2') format('woff2'),
+       url('@{lato-font-path}Lato-Italic-webfont.woff') format('woff'),
+       url('@{lato-font-path}Lato-Italic-webfont.ttf') format('truetype'),
+       url('@{lato-font-path}Lato-Italic-webfont.svg#latoitalic') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'latolight';
+  src: url('@{lato-font-path}Lato-Light-webfont.eot');
+  src: url('@{lato-font-path}Lato-Light-webfont.eot?#iefix') format('embedded-opentype'),
+       url('@{lato-font-path}Lato-Light-webfont.woff2') format('woff2'),
+       url('@{lato-font-path}Lato-Light-webfont.woff') format('woff'),
+       url('@{lato-font-path}Lato-Light-webfont.ttf') format('truetype'),
+       url('@{lato-font-path}Lato-Light-webfont.svg#latolight') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: @font-family-base;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+a {
+  cursor: pointer;
+  color: #5d95c2;
+  text-decoration: none;
+  &:hover,
+  &:focus {
+    color: darken(@clr-link, 10);
+    text-decoration: underline;
+  }
+}
+
+p, time, a, em, strong {
+  font-family: @font-family-base;
+}
+
+/**
+* Paragraphs & header tags do not have margin unless they are followed by another paragraph or header.
+*
+* @section Paragraph Spacing
+* @sectionof Typography
+*
+* @hideCode
+* @example
+* <style>
+*   .box {
+*     background-color: #f5f5f5;
+*     border: 1px solid #ddd;
+*     margin-bottom: 1em;
+*     padding: 0 0.5em;
+*   }
+*   .box:last-child {
+*     margin-bottom: 0;
+*   }
+* </style>
+*
+* <div class="box">
+*   <h2>Header w/no Following Content</h2>
+* </div>
+* <div class="box">
+*   <p>Here is a paragraph in a div with no following paragraph. Notice how no margin is applied to the bottom of this &lt;p&gt; tag.</p>
+* </div>
+* <div class="box">
+*   <p>Here is a paragraph with another paragraph following it. Notice that natural paragraph spacing is added in the way of margin, but the bottom paragraph does not have bottom spacing.</p>
+*   <p>This spacing technique allows paragraphs to fit nicely into containers, cards, tables, modals etc. The padding of the container can create the necessary spacing, although for this example no top or bottom padding has been applied.</p>
+* </div>
+* <div class="box">
+*   <h2>Header Followed by Content</h2>
+*   <p>Here is some text after a header. It has no bottom spacing unless it's followed by another paragraph or header. Things fit nicely into boxes by themselves, but also have nice typography when written in a document.</p>
+*   <h3>Header After Content</h3>
+*   <p>Some paragraph content after the second header. Otherwise the header above would have no bottom spacing and fit flush with the bottom of this here box.</p>
+* </div>
+*/
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: @font-family-headers;
+  font-weight: 300;
+  margin: 0;
+  & + p {
+    margin-top: 0.75em;
+  }
+  p + &,
+  & + & {
+    margin-top: 1em;
+  }
+}
+
+p {
+  line-height: 1.4em;
+  margin: 0;
+  & + p {
+    margin-top: 0.5em;
+  }
+}
+
+// HELPERS
+/**
+* A number of helper classes are provided for quick adjustment and alignment within a composition.
+*
+* @section Helpers
+* @sectionof Typography
+*
+* @example
+* <div style="text-align: right;">
+*   <p class="left">Left align.</p>
+* </div>
+* <p class="center">Center</p>
+* <p class="right">Right align.</p>
+* <p class="large">Larger Font Size</p>
+* <p class="small">Smaller Font Size</p>
+* <div>
+*   <h4 class="inline">Set to </h4>
+*   <h4 class="inline">inline-block</h4>
+* </div>
+* <h4 class="flush">Remove all margin.</h4>
+*/
+
+.left {
+  text-align: left;
+}
+.center {
+  text-align: center;
+}
+.right {
+  text-align: right;
+}
+
+.large {
+  font-size: 1.125em;
+}
+.small {
+  font-size: 0.75em;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  &.inline {
+    display: inline-block;
+  }
+}
+
+.flush {
+  margin: 0;
+}
+
+/**
+* The `sr-only` class will hide text needed only for users of screen readers. This is useful for icon buttons and stuff screen readers would otherwise not be able to interact with.
+*
+* @section Screen Reader Only
+* @sectionof Typography
+*
+* @example
+* <button class="text icon-add"><span class="sr-only">Add Something</span></button>
+*/
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
