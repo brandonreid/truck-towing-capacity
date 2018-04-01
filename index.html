@@ -197,7 +197,17 @@
 
     function calvTowingCapacity() {
       var tc = $('#towingCapacity').val() ? parseInt($('#towingCapacity').val(), 10) : 0;
+      var rvGvwr = $('#rvGvwr').val() ? parseInt($('#rvGvwr').val(), 10) : 0;
       $('#towingCapTotal').text(numberWithCommas(tc));
+      if (tc < rvGvwr) {
+        $('#towingCapTotal')
+          .addClass('over')
+          .removeClass('good');
+      } else {
+        $('#towingCapTotal')
+          .removeClass('over')
+          .addClass('good');
+      }
     }
 
     function storeUpdatedValues() {
