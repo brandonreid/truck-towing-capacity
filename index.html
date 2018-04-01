@@ -168,7 +168,7 @@
       var truckGvwr = $('#gvwr').val() ? parseInt($('#gvwr').val(), 10) : 0;
       gvw = curbWeight + estPayload + rvHitchWeight;
       $('#newGvw').text(numberWithCommas(gvw));
-      if (curbWeight > truckGvwr) {
+      if (gvw > truckGvwr) {
         $('#newGvw')
           .addClass('over')
           .removeClass('good');
