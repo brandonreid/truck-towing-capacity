@@ -165,9 +165,10 @@
 
     function calcGvw() {
       var curbWeight = $('#curbWeight').val() ? parseInt($('#curbWeight').val(), 10) : 0;
+      var truckGvwr = $('#gvwr').val() ? parseInt($('#gvwr').val(), 10) : 0;
       gvw = curbWeight + estPayload + rvHitchWeight;
       $('#newGvw').text(numberWithCommas(gvw));
-      if (curbWeight < 0) {
+      if (curbWeight > truckGvwr) {
         $('#newGvw')
           .addClass('over')
           .removeClass('good');
@@ -180,9 +181,10 @@
 
     function calcGcvw() {
       var rvGvwr = $('#rvGvwr').val() ? parseInt($('#rvGvwr').val(), 10) : 0;
+      var truckGcvwr = $('#gcvwr').val() ? parseInt($('#gcvwr').val(), 10) : 0;
       var gcvw = (rvGvwr - rvHitchWeight) + gvw;
       $('#newGcvw').text(numberWithCommas(gcvw));
-      if (gcvw < 0) {
+      if (gcvw > truckGcvwr) {
         $('#newGcvw')
           .addClass('over')
           .removeClass('good');
